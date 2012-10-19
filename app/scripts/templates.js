@@ -3,8 +3,12 @@ helpers = helpers || Ember.Handlebars.helpers; data = data || {};
   var buffer = '', stack1, escapeExpression=this.escapeExpression;
 
 
-  data.buffer.push("<header>\n  <h1>Unmarked</h1>\n  <p>Keep your bookmarks where they belong: in your remoteStorage.</p>\n</header>\n\n");
-  stack1 = helpers.view.call(depth0, "Unmarked.BookmarkListView", {hash:{},contexts:[depth0],data:data});
+  data.buffer.push("<header>\n  <h1>Unmarked</h1>\n  <p>Keep your bookmarks where they belong: in your remoteStorage.</p>\n</header>\n\n<nav>\n  <ul>\n    <li><a ");
+  stack1 = helpers.action.call(depth0, "goToBookmarks", {hash:{},contexts:[depth0],data:data});
+  data.buffer.push(escapeExpression(stack1) + ">Bookmarks</a></li>\n    <li><a ");
+  stack1 = helpers.action.call(depth0, "goToImport", {hash:{},contexts:[depth0],data:data});
+  data.buffer.push(escapeExpression(stack1) + ">Import</a></li>\n  </ul>\n</nav>\n\n");
+  stack1 = helpers._triageMustache.call(depth0, "outlet", {hash:{},contexts:[depth0],data:data});
   data.buffer.push(escapeExpression(stack1) + "\n");
   return buffer;
 });
@@ -73,9 +77,17 @@ function program8(depth0,data) {
   data.buffer.push(escapeExpression(stack1) + "</span> &middot;\n      ");
   return buffer;}
 
-  data.buffer.push("<ul>\n");
-  stack1 = helpers.each.call(depth0, "Unmarked.BookmarksController.content", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],data:data});
+  data.buffer.push("<h2>Bookmarks</h2>\n<ul>\n");
+  stack1 = helpers.each.call(depth0, "controller.content", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n</ul>\n");
   return buffer;
+});
+
+Ember.TEMPLATES["import"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  
+
+
+  data.buffer.push("<div id=\"delicious\">\n  <h2>Import from Delicious export file</h2>\n  <input id=\"import-delicious\" type=\"file\" name=\"import-delicious\" onchange=\"importDeliciousFile();\" />\n  <div class=\"status\"></div>\n</div>\n");
 });

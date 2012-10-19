@@ -21,7 +21,7 @@
           $('input#import-delicious').remove();
           $('#delicious .status').html($('<p>Importing <strong>'+deliciousLinks.length+'</strong> bookmarks...</p>'));
 
-          setTimeout(importDeliciousLinks, 0);
+          setTimeout(Unmarked.get('router.importController').importDeliciousLinks, 0);
         };
 
         function importDeliciousLinks() {
@@ -55,17 +55,7 @@
         }
       </script>
 
-      <div id="delicious">
-        <h2>Import from Delicious export file</h2>
-        <input id="import-delicious" type="file" name="import-delicious" onchange="importDeliciousFile();" />
-        <div class="status"></div>
-      </div>
-
-      <div class="container">
-        <script type="text/x-handlebars">
-          {{view Unmarked.ApplicationView}}
-        </script>
-      </div>
+      <div class="container" id="application"></div>
 
       <!-- build:js scripts/scripts.js -->
       <script src="scripts/vendor/jquery.min.js"></script>
@@ -83,10 +73,14 @@
       <script src="scripts/controllers/bookmarks-controller.js"></script>
       <script src="scripts/models/bookmark-model.js"></script>
       <script src="scripts/views/bookmark_list-view.js"></script>
+      <script src="scripts/controllers/import-controller.js"></script>
+      <script src="scripts/views/import-view.js"></script>
       <script src="scripts/templates.js"></script>
       <!-- endbuild -->
 
       <script>
+        Unmarked.initialize();
+
         $.each(remoteStorage.bookmarks.listBookmarks(), function(){
           Unmarked.BookmarksController.loadBookmark(
             this.url,

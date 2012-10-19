@@ -1,4 +1,6 @@
-var Unmarked = Ember.Application.create();
+var Unmarked = Ember.Application.create({
+  rootElement: '#application'
+});
 
 remoteStorage.claimAccess({
   bookmarks: 'rw'

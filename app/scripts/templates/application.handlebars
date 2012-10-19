@@ -3,4 +3,11 @@
   <p>Keep your bookmarks where they belong: in your remoteStorage.</p>
 </header>
 
-{{view Unmarked.BookmarkListView}}
+<nav>
+  <ul>
+    <li><a {{action goToBookmarks}}>Bookmarks</a></li>
+    <li><a {{action goToImport}}>Import</a></li>
+  </ul>
+</nav>
+
+{{outlet}}

@@ -1,8 +1,9 @@
-Unmarked.BookmarksController = Ember.ArrayController.create({
+Unmarked.BookmarksController = Ember.ArrayController.extend({
 
   content: [],
 
   loadBookmark: function(url, title, description, unread, tags, createdAt) {
+    console.log("calling loadBookmark");
     var bookmark = Unmarked.Bookmark.create({
       url: url,
       title: title,
