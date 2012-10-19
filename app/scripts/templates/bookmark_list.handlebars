@@ -1,5 +1,12 @@
 <ul>
 {{#each Unmarked.BookmarksController.content}}
-  <li>{{url}} {{title}}</li>
+  <li>
+    {{#if title}}
+      <h3><a {{bindAttr href="url"}}>{{title}}</a></h3>
+    {{/if}}
+    <span class="url"><a {{bindAttr href="url"}}>{{url}}</a></span>
+    <br>
+    <span class="tags">{{tags}}</span>
+  </li>
 {{/each}}
 </ul>

@@ -16,11 +16,29 @@ helpers = helpers || Ember.Handlebars.helpers; data = data || {};
 function program1(depth0,data) {
   
   var buffer = '', stack1;
-  data.buffer.push("\n  <li>");
+  data.buffer.push("\n  <li>\n    ");
+  stack1 = helpers['if'].call(depth0, "title", {hash:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n    <span class=\"url\"><a ");
+  stack1 = {};
+  stack1['href'] = "url";
+  stack1 = helpers.bindAttr.call(depth0, {hash:stack1,contexts:[],data:data});
+  data.buffer.push(escapeExpression(stack1) + ">");
   stack1 = helpers._triageMustache.call(depth0, "url", {hash:{},contexts:[depth0],data:data});
-  data.buffer.push(escapeExpression(stack1) + " ");
+  data.buffer.push(escapeExpression(stack1) + "</a></span>\n    <br>\n    <span class=\"tags\">");
+  stack1 = helpers._triageMustache.call(depth0, "tags", {hash:{},contexts:[depth0],data:data});
+  data.buffer.push(escapeExpression(stack1) + "</span>\n  </li>\n");
+  return buffer;}
+function program2(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\n      <h3><a ");
+  stack1 = {};
+  stack1['href'] = "url";
+  stack1 = helpers.bindAttr.call(depth0, {hash:stack1,contexts:[],data:data});
+  data.buffer.push(escapeExpression(stack1) + ">");
   stack1 = helpers._triageMustache.call(depth0, "title", {hash:{},contexts:[depth0],data:data});
-  data.buffer.push(escapeExpression(stack1) + "</li>\n");
+  data.buffer.push(escapeExpression(stack1) + "</a></h3>\n    ");
   return buffer;}
 
   data.buffer.push("<ul>\n");
