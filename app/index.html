@@ -1,0 +1,34 @@
+<html class="no-js">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <title>Unmarked</title>
+        <meta name="description" content=""/>
+        <meta name="viewport" content="width=device-width"/>
+        <link rel="stylesheet" href="styles/main.css"/>
+    </head>
+    <body>
+      <div id="remotestorage-connect"></div>
+
+      <div id="container">
+        <script type="text/x-handlebars">
+          {{view Unmarked.ApplicationView}}
+        </script>
+      </div>
+
+      <!-- build:js scripts/scripts.js -->
+      <script src="scripts/vendor/jquery.min.js"></script>
+      <script src="scripts/vendor/remoteStorage.js"></script>
+      <script src="scripts/vendor/remoteStorage-modules.js"></script>
+      <script src="scripts/vendor/handlebars-1.0.0.beta.6.js"></script>
+      <script src="scripts/vendor/ember-1.0.pre.min.js"></script>
+      <script src="scripts/main.js"></script>
+      <script src="scripts/routes/app-router.js"></script>
+      <script src="scripts/store.js"></script>
+      <script src="scripts/controllers/application-controller.js"></script>
+      <script src="scripts/models/application-model.js"></script>
+      <script src="scripts/views/application-view.js"></script>
+      <script src="scripts/templates.js"></script>
+      <!-- endbuild -->
+    </body>
+</html>
