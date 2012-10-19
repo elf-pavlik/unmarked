@@ -28,7 +28,22 @@
       <script src="scripts/controllers/application-controller.js"></script>
       <script src="scripts/models/application-model.js"></script>
       <script src="scripts/views/application-view.js"></script>
+      <script src="scripts/controllers/bookmarks-controller.js"></script>
+      <script src="scripts/models/bookmark-model.js"></script>
+      <script src="scripts/views/bookmark_list-view.js"></script>
       <script src="scripts/templates.js"></script>
       <!-- endbuild -->
+
+      <script>
+        $.each(remoteStorage.bookmarks.listBookmarks(), function(){
+          Unmarked.BookmarksController.createBookmark(
+            this.url,
+            this.title,
+            this.unread,
+            this.tags,
+            this.createdAt
+          );
+        });
+      </script>
     </body>
 </html>
