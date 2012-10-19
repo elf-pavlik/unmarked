@@ -3,10 +3,14 @@
   <li>
     {{#if title}}
       <h3><a {{bindAttr href="url"}}>{{title}}</a></h3>
+    {{else}}
+      <h3><a {{bindAttr href="url"}}>Untitled</a></h3>
     {{/if}}
     <span class="url"><a {{bindAttr href="url"}}>{{url}}</a></span>
-    <br>
-    <span class="tags">{{tags}}</span>
+    {{#if tags}}
+      <br>
+      <span class="tags">{{tags}}</span>
+    {{/if}}
   </li>
 {{/each}}
 </ul>
