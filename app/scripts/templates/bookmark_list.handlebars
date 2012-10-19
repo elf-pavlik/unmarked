@@ -6,11 +6,13 @@
     {{else}}
       <h3><a {{bindAttr href="url"}}>Untitled</a></h3>
     {{/if}}
-    <span class="url"><a {{bindAttr href="url"}}>{{url}}</a></span>
-    {{#if tags}}
-      <br>
-      <span class="tags">{{tags}}</span>
-    {{/if}}
+    <p class="url"><a {{bindAttr href="url"}}>{{url}}</a></p>
+    <p class="meta">
+      {{#if tags}}
+        <span class="tags">{{tagsFormatted}}</span> &middot;
+      {{/if}}
+      <span class="created-at">{{createdAtTimeAgo}}</span>
+    <p>
   </li>
 {{/each}}
 </ul>

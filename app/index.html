@@ -16,8 +16,53 @@
         </script>
       </div>
 
+      <script>
+        oFReader = new FileReader()
+
+        oFReader.onload = function (oFREvent) {
+          $('#delicious').append( $('<div id=import-delicious-html></div>') );
+          $('#import-delicious-html').append( oFREvent.target.result );
+
+          links = $('#import-delicious-html').find('dt a');
+          $('#delicious').append($('<p>Importing <strong>'+links.length+'</strong> bookmarks...</p>'));
+
+          $('#import-delicious-html').find('a').each(function(index, element){
+            a = $(element);
+            var description = null;
+            var tags = null;
+
+            if (a.parent().next().is('dd')) {
+              description = $(a).parent().next().text();
+            }
+            if (a.attr('TAGS')) {
+              tags = a.attr('TAGS').split(',');
+            }
+
+            Unmarked.BookmarksController.loadBookmark(
+              a.attr('href'),
+              a.text(),
+              description,
+              false,
+              tags,
+              moment.unix(a.attr('ADD_DATE')).format()
+            );
+          });
+        };
+
+        function importDeliciousFile() {
+          if (document.getElementById("import-delicious").files.length === 0) { return; }
+          var oFile = document.getElementById("import-delicious").files[0];
+          oFReader.readAsText(oFile);
+        }
+      </script>
+
+      <div id="delicious">
+        <input id="import-delicious" type="file" name="import-delicious" onchange="importDeliciousFile();" />
+      </div>
+
       <!-- build:js scripts/scripts.js -->
       <script src="scripts/vendor/jquery.min.js"></script>
+      <script src="scripts/vendor/moment.min.js"></script>
       <script src="scripts/vendor/remoteStorage.js"></script>
       <script src="scripts/vendor/remoteStorage-modules.js"></script>
       <script src="scripts/vendor/handlebars-1.0.0.beta.6.js"></script>
@@ -36,7 +81,7 @@
 
       <script>
         $.each(remoteStorage.bookmarks.listBookmarks(), function(){
-          Unmarked.BookmarksController.createBookmark(
+          Unmarked.BookmarksController.loadBookmark(
             this.url,
             this.title,
             this.description,
