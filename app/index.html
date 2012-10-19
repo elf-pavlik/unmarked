@@ -10,12 +10,6 @@
     <body>
       <div id="remotestorage-connect"></div>
 
-      <div class="container">
-        <script type="text/x-handlebars">
-          {{view Unmarked.ApplicationView}}
-        </script>
-      </div>
-
       <script>
         oFReader = new FileReader()
 
@@ -23,10 +17,15 @@
           $('#delicious').append( $('<div id=import-delicious-html></div>') );
           $('#import-delicious-html').append( oFREvent.target.result );
 
-          links = $('#import-delicious-html').find('dt a');
-          $('#delicious').append($('<p>Importing <strong>'+links.length+'</strong> bookmarks...</p>'));
+          window.deliciousLinks = $('#import-delicious-html').find('dt a');
+          $('input#import-delicious').remove();
+          $('#delicious .status').html($('<p>Importing <strong>'+deliciousLinks.length+'</strong> bookmarks...</p>'));
 
-          $('#import-delicious-html').find('a').each(function(index, element){
+          setTimeout(importDeliciousLinks, 0);
+        };
+
+        function importDeliciousLinks() {
+          deliciousLinks.each(function(index, element){
             a = $(element);
             var description = null;
             var tags = null;
@@ -47,7 +46,7 @@
               moment.unix(a.attr('ADD_DATE')).format()
             );
           });
-        };
+        }
 
         function importDeliciousFile() {
           if (document.getElementById("import-delicious").files.length === 0) { return; }
@@ -57,7 +56,15 @@
       </script>
 
       <div id="delicious">
+        <h2>Import from Delicious export file</h2>
         <input id="import-delicious" type="file" name="import-delicious" onchange="importDeliciousFile();" />
+        <div class="status"></div>
+      </div>
+
+      <div class="container">
+        <script type="text/x-handlebars">
+          {{view Unmarked.ApplicationView}}
+        </script>
       </div>
 
       <!-- build:js scripts/scripts.js -->
