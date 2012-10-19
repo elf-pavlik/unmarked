@@ -7,6 +7,9 @@
       <h3><a {{bindAttr href="url"}}>Untitled</a></h3>
     {{/if}}
     <p class="url"><a {{bindAttr href="url"}}>{{url}}</a></p>
+    {{#if description}}
+    <p class="description">{{description}}</p>
+    {{/if}}
     <p class="meta">
       {{#if tags}}
         <span class="tags">{{tagsFormatted}}</span> &middot;
